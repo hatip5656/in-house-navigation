@@ -1,0 +1,43 @@
+spring:
+  config:
+    activate:
+      on-profile: default
+  datasource:
+    url: jdbc:h2:mem:db
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop  # Create and drop the database schema on startup (for demonstration purposes)
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect   # Hibernate dialect for H2 database
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        webAllowOthers: true
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    org.hibernate.SQL: debug
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:test    # JDBC URL for H2 in-memory database
+  jpa:
+    defer-datasource-initialization: false
+  sql:
+    init:
+      mode: never
+
